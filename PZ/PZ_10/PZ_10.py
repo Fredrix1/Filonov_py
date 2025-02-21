@@ -15,16 +15,21 @@ galereya = {'Чехов', 'Тютчев', 'Пушкин'}
 # Книги, которые мы ищем
 griboedov_mayakovsky = {'Грибоедов', 'Маяковский'}
 
-# Определяем, в каких магазинах нельзя приобрести книги Грибоедова и Маяковского
+# Определяем список магазинов и их названия
+stores = [
+    ('Магистр', magistr),
+    ('Дом книги', domknigi),
+    ('Книжный рынок', bookmarket),
+    ('Галерея', galereya)
+]
+
+# Находим магазины, где нет хотя бы одной из искомых книг
 stores_without_griboedov_mayakovsky = []
 
-if not griboedov_mayakovsky.issubset(magistr):
-    stores_without_griboedov_mayakovsky.append('Магистр')
-if not griboedov_mayakovsky.issubset(domknigi):
-    stores_without_griboedov_mayakovsky.append('ДомКниги')
-if not griboedov_mayakovsky.issubset(bookmarket):
-    stores_without_griboedov_mayakovsky.append('БукМаркет')
-if not griboedov_mayakovsky.issubset(galereya):
-    stores_without_griboedov_mayakovsky.append('Галерея')
+for store_name, store_books in stores:
+    # Проверяем, есть ли хотя бы одна из искомых книг в магазине
+    if not (store_books & griboedov_mayakovsky):
+        stores_without_griboedov_mayakovsky.append(store_name)
 
+# Выводим результат
 print('Магазины, где нельзя приобрести книги Грибоедова и Маяковского:', stores_without_griboedov_mayakovsky)
